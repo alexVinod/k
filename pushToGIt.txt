@@ -1,0 +1,15 @@
+prompt=$g
+git init
+git remote add origin https://github.com/alexVinod/test
+dir
+git add package.json public README.md src SEARCH_TERMS.md
+git commit
+git push origin master
+
+-----------------------------------------------------------
+
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/alexVinod/k.git
+git push -u origin master
