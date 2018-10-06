@@ -1,0 +1,4 @@
+name	eng	maths	Total
+sai	45	65	110
+ram	55	95	150
+lakshmi	75	86	161
