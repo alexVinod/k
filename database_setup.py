@@ -5,7 +5,19 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from sqlalchemy import create_engine
 
+from flask_login import UserMixin
+
 Base = declarative_base()
+
+class Owner(Base, UserMixin):
+    __tablename__ = 'ownerDetails'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String(250), nullable=False)    
+    email = Column(String(250), unique=True)
+    password = Column(String(250), nullable=False)
+    image = Column(String(250), nullable=False)
+    ownerType = Column(String(250), nullable=False)
 
 
 class Restaurant(Base):
@@ -13,6 +25,10 @@ class Restaurant(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
+    image = Column(String(3050), nullable=False )
+    
+    owner_id = Column(Integer, ForeignKey('ownerDetails.id'))
+    owner = relationship(Owner)
 
     @property
     def serialize(self):
@@ -31,6 +47,9 @@ class MenuItem(Base):
     course = Column(String(250))
     restaurant_id = Column(Integer, ForeignKey('restaurant.id'))
     restaurant = relationship(Restaurant)
+
+    owner_id = Column(Integer, ForeignKey('ownerDetails.id'))
+    owner = relationship(Owner)
 
     @property
     def serialize(self):
